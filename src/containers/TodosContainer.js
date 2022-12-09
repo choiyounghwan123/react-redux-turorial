@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import Todos from "../components/Todos";
-import { remove, changeInput, insert } from "../modules/todos";
+import { remove, changeInput, insert, toggle } from "../modules/todos";
 
 const TodosContainer = ({
   input,
@@ -34,7 +34,9 @@ const mapDispatchToProps = (dispatch) => ({
   remove: (id) => {
     dispatch(remove(id));
   },
-  toggle: () => {},
+  toggle: (id) => {
+    dispatch(toggle(id));
+  },
   insert: (input) => {
     dispatch(insert(input));
   },

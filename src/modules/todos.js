@@ -12,8 +12,6 @@ export const changeInput = (input) => ({
   input,
 });
 
-let id = 3;
-
 export const insert = (input) => ({
   type: INSERT,
   todo: {
@@ -23,6 +21,11 @@ export const insert = (input) => ({
   },
 });
 
+export const toggle = (id) => ({
+  type: TOGGLE,
+  id,
+});
+let id = 3;
 const initialState = {
   input: "",
   todos: [
@@ -45,7 +48,12 @@ function todos(state = initialState, action) {
     case INSERT:
       return { ...state, todos: state.todos.concat(action.todo) };
     case TOGGLE:
-      return {};
+      return {
+        ...state,
+        todos: state.todos.map((todo) =>
+          todo.id === action.id ? { ...todo, done: !todo.done } : todo
+        ),
+      };
     case REMOVE:
       return {
         ...state,

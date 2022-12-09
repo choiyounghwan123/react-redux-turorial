@@ -1,9 +1,14 @@
 import React from "react";
 
-const TodoItem = ({ todo, onRemove }) => {
+const TodoItem = ({ todo, onRemove, onToggle }) => {
   return (
     <div>
-      <input type="checkbox" checked={todo.done} readOnly={true}></input>
+      <input
+        type="checkbox"
+        checked={todo.done}
+        readOnly={true}
+        onClick={() => onToggle(todo.id)}
+      ></input>
       <span style={{ textDecoration: todo.done ? "line-through" : "none" }}>
         {todo.text}
       </span>
@@ -43,7 +48,12 @@ const Todos = ({
       </form>
       <div>
         {todos.map((todo) => (
-          <TodoItem key={todo.id} todo={todo} onRemove={onRemove}></TodoItem>
+          <TodoItem
+            key={todo.id}
+            todo={todo}
+            onRemove={onRemove}
+            onToggle={onToggle}
+          ></TodoItem>
         ))}
       </div>
     </div>
